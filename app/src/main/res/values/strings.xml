@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Hero App</string>
+    <string name="name">name</string>
+    <string name="realname">realname</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
