@@ -9,21 +9,20 @@ import com.example.gabrm.retrofitjsonexample.R;
 
 public class HeroActivity extends AppCompatActivity implements HeroesFragment.OnFragmentInteractionListener,BioFragment.OnFragmentInteractionListener {
 
-    private final String RECYCLER_FRAGMENT_TAG="REC_FRAGMENT";
     private final String TAG = getClass().getSimpleName();
-
+    Fragment fragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         HeroesFragment heroesFragment = HeroesFragment.newInstance();
-        Fragment fragment=getSupportFragmentManager().findFragmentByTag(TAG);
+        fragment=getSupportFragmentManager().findFragmentByTag(TAG);
         if(fragment ==null) {
             getSupportFragmentManager().beginTransaction().
-                    add(R.id.frameLayout, heroesFragment,TAG).
-                    addToBackStack(RECYCLER_FRAGMENT_TAG).commit();
+                    add(R.id.frameLayout, heroesFragment, TAG).commit();
         }
     }
+
 
 
     @Override
