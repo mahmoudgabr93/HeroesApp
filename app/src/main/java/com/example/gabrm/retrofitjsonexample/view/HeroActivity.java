@@ -24,7 +24,6 @@ public class HeroActivity extends AppCompatActivity implements HeroesFragment.On
     }
 
 
-
     @Override
     public void onFragmentInteraction(Uri uri) {
 

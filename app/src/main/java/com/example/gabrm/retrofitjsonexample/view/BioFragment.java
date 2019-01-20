@@ -1,5 +1,6 @@
 package com.example.gabrm.retrofitjsonexample.view;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import com.example.gabrm.retrofitjsonexample.R;
 import com.example.gabrm.retrofitjsonexample.databinding.FragmentBioBinding;
 import com.example.gabrm.retrofitjsonexample.model.HeroModel;
+import com.example.gabrm.retrofitjsonexample.viewmodel.BioFragmentViewModel;
 
 
 /**
@@ -25,13 +27,10 @@ import com.example.gabrm.retrofitjsonexample.model.HeroModel;
 public class BioFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private BioFragmentViewModel bioFragmentViewModel;
     private static final String BUNDLE_TAG = "hero";
-    private  HeroModel heroModel;
+    private HeroModel heroModel;
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
 
     private OnFragmentInteractionListener mListener;
@@ -44,8 +43,8 @@ public class BioFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param heroModel Parameter 1.
+     *
      * @return A new instance of fragment BioFragment.
      */
     // TODO: Rename and change types and number of parameters
@@ -62,8 +61,9 @@ public class BioFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        bioFragmentViewModel=ViewModelProviders.of(this).get(BioFragmentViewModel.class);
         if (getArguments() != null) {
-            heroModel= (HeroModel) getArguments().getSerializable(BUNDLE_TAG);
+            bioFragmentViewModel.getBundle(heroModel,BUNDLE_TAG,this);
         }
     }
 
