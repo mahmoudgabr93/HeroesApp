@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 import com.example.gabrm.retrofitjsonexample.R;
 
-public class HeroActivity extends AppCompatActivity implements HereosFragment.OnFragmentInteractionListener,BioFragment.OnFragmentInteractionListener {
+public class HeroActivity extends AppCompatActivity implements HeroesFragment.OnFragmentInteractionListener,BioFragment.OnFragmentInteractionListener {
 
     private final String RECYCLER_FRAGMENT_TAG="REC_FRAGMENT";
     private final String TAG = getClass().getSimpleName();
@@ -16,11 +16,11 @@ public class HeroActivity extends AppCompatActivity implements HereosFragment.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        HereosFragment hereosFragment =HereosFragment.newInstance();
+        HeroesFragment heroesFragment = HeroesFragment.newInstance();
         Fragment fragment=getSupportFragmentManager().findFragmentByTag(TAG);
         if(fragment ==null) {
             getSupportFragmentManager().beginTransaction().
-                    add(R.id.frameLayout, hereosFragment,TAG).
+                    add(R.id.frameLayout, heroesFragment,TAG).
                     addToBackStack(RECYCLER_FRAGMENT_TAG).commit();
         }
     }

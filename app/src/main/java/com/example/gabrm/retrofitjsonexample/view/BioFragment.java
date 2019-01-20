@@ -1,13 +1,9 @@
 package com.example.gabrm.retrofitjsonexample.view;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +12,6 @@ import android.view.ViewGroup;
 import com.example.gabrm.retrofitjsonexample.R;
 import com.example.gabrm.retrofitjsonexample.databinding.FragmentBioBinding;
 import com.example.gabrm.retrofitjsonexample.model.HeroModel;
-import com.example.gabrm.retrofitjsonexample.util.HeroAdapter;
-import com.example.gabrm.retrofitjsonexample.viewmodel.HeroViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -37,10 +28,11 @@ public class BioFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static final String BUNDLE_TAG = "hero";
+    private  HeroModel heroModel;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private HeroModel heroModel;
+
 
     private OnFragmentInteractionListener mListener;
 

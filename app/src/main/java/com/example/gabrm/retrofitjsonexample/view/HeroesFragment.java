@@ -16,9 +16,8 @@ import android.view.ViewGroup;
 
 import com.example.gabrm.retrofitjsonexample.R;
 import com.example.gabrm.retrofitjsonexample.model.HeroModel;
-import com.example.gabrm.retrofitjsonexample.util.HeroAdapter;
-import com.example.gabrm.retrofitjsonexample.viewmodel.HeroViewModel;
-import com.example.gabrm.retrofitjsonexample.viewmodel.RecyclerFragmentViewModel;
+import com.example.gabrm.retrofitjsonexample.adapter.HeroAdapter;
+import com.example.gabrm.retrofitjsonexample.viewmodel.HeroesViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,30 +25,29 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link HereosFragment.OnFragmentInteractionListener} interface
+ * {@link HeroesFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link HereosFragment#newInstance} factory method to
+ * Use the {@link HeroesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HereosFragment extends Fragment {
+public class HeroesFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private RecyclerView recyclerView;
-    private RecyclerFragmentViewModel recyclerFragmentViewModel;
-    private HeroViewModel heroViewModel;
+    private HeroesViewModel heroesViewModel;
     private List<HeroModel> heroModelList = new ArrayList<>();
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private static HereosFragment fragment =null;
+    private static HeroesFragment fragment =null;
 
     private OnFragmentInteractionListener mListener;
 
     @SuppressLint("ValidFragment")
-    private HereosFragment() {
-        // Required empty public constructor
+    private HeroesFragment() {
+        // Required empty private constructor
     }
 
     /**
@@ -58,13 +56,13 @@ public class HereosFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment HereosFragment.
+     * @return A new instance of fragment HeroesFragment.
      */
     // TODO: Rename and change types and number of parameters
 
-    public static HereosFragment newInstance() {
+    public static HeroesFragment newInstance() {
         if(fragment==null) {
-            fragment = new HereosFragment();
+            fragment = new HeroesFragment();
         }
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -74,10 +72,12 @@ public class HereosFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /*
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        */
     }
 
     @Override
@@ -97,8 +97,8 @@ public class HereosFragment extends Fragment {
     }
 
     private void subscribeLiveData() {
-        heroViewModel= ViewModelProviders.of(this).get(HeroViewModel.class);
-        heroViewModel.getLiveData().observe(this, new Observer<List<HeroModel>>() {
+        heroesViewModel= ViewModelProviders.of(this).get(HeroesViewModel.class);
+        heroesViewModel.getLiveData().observe(this, new Observer<List<HeroModel>>() {
             @Override
             public void onChanged(@Nullable List<HeroModel> heroModels) {
                 heroModelList.addAll(heroModels);
@@ -111,7 +111,6 @@ public class HereosFragment extends Fragment {
                         getActivity().getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.frameLayout,bioFragment).addToBackStack(null).commit();
                     }
-
                 });
             }
         });

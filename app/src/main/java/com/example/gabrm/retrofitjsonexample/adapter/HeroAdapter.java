@@ -1,39 +1,23 @@
-package com.example.gabrm.retrofitjsonexample.util;
+package com.example.gabrm.retrofitjsonexample.adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
-import android.net.Uri;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.gabrm.retrofitjsonexample.R;
-import com.example.gabrm.retrofitjsonexample.databinding.FragmentBioBinding;
 import com.example.gabrm.retrofitjsonexample.databinding.ItemHeroCardBinding;
 import com.example.gabrm.retrofitjsonexample.model.HeroModel;
-import com.example.gabrm.retrofitjsonexample.view.BioFragment;
 import com.squareup.picasso.Picasso;
 
-import java.io.FileDescriptor;
-import java.io.PrintWriter;
 import java.util.List;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.ViewHolder> {
     private List<HeroModel> heroModelList;
