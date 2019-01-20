@@ -1,5 +1,6 @@
 package com.example.gabrm.retrofitjsonexample.view;
 
+import android.annotation.SuppressLint;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -17,6 +18,7 @@ import com.example.gabrm.retrofitjsonexample.R;
 import com.example.gabrm.retrofitjsonexample.model.HeroModel;
 import com.example.gabrm.retrofitjsonexample.util.HeroAdapter;
 import com.example.gabrm.retrofitjsonexample.viewmodel.HeroViewModel;
+import com.example.gabrm.retrofitjsonexample.viewmodel.RecyclerFragmentViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,26 +26,29 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link recyclerFragment.OnFragmentInteractionListener} interface
+ * {@link HereosFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link recyclerFragment#newInstance} factory method to
+ * Use the {@link HereosFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class recyclerFragment extends Fragment {
+public class HereosFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private RecyclerView recyclerView;
+    private RecyclerFragmentViewModel recyclerFragmentViewModel;
     private HeroViewModel heroViewModel;
     private List<HeroModel> heroModelList = new ArrayList<>();
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private static HereosFragment fragment =null;
 
     private OnFragmentInteractionListener mListener;
 
-    public recyclerFragment() {
+    @SuppressLint("ValidFragment")
+    private HereosFragment() {
         // Required empty public constructor
     }
 
@@ -53,14 +58,15 @@ public class recyclerFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment recyclerFragment.
+     * @return A new instance of fragment HereosFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static recyclerFragment newInstance(String param1, String param2) {
-        recyclerFragment fragment = new recyclerFragment();
+
+    public static HereosFragment newInstance() {
+        if(fragment==null) {
+            fragment = new HereosFragment();
+        }
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -101,10 +107,7 @@ public class recyclerFragment extends Fragment {
                 adapter.setOnItemClickListener(new HeroAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClicked(HeroModel heroModel) {
-                        BioFragment bioFragment=new BioFragment();
-                        Bundle bundle=new Bundle();
-                        bundle.putSerializable("hero",heroModel);
-                        bioFragment.setArguments(bundle);
+                        BioFragment bioFragment=BioFragment.newInstance(heroModel);
                         getActivity().getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.frameLayout,bioFragment).addToBackStack(null).commit();
                     }

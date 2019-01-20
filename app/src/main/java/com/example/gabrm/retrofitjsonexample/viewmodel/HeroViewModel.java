@@ -2,6 +2,7 @@ package com.example.gabrm.retrofitjsonexample.viewmodel;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
+import android.os.Bundle;
 
 import com.example.gabrm.retrofitjsonexample.model.HeroModel;
 import com.example.gabrm.retrofitjsonexample.network.RequestFactory;
@@ -12,6 +13,7 @@ public class HeroViewModel extends ViewModel {
     private List<HeroModel> heroModelList;
     private RequestFactory retroClass=new RequestFactory();
     private LiveData<List<HeroModel>> liveData;
+    private final String BUNDLE_TAG = "hero";
 
     /*
     deprecated
@@ -27,4 +29,5 @@ public class HeroViewModel extends ViewModel {
             liveData= retroClass.getHeroesLiveData();
         return liveData;
     }
+
 }

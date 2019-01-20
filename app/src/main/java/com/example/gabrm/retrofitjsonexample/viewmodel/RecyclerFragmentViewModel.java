@@ -1,10 +1,7 @@
 package com.example.gabrm.retrofitjsonexample.viewmodel;
 
-import android.os.Bundle;
+import android.arch.lifecycle.ViewModel;
 
-import com.example.gabrm.retrofitjsonexample.model.HeroModel;
-import com.example.gabrm.retrofitjsonexample.view.BioFragment;
-
-public class RecyclerFragmentViewModel extends HeroViewModel {
-
+public class RecyclerFragmentViewModel extends ViewModel {
+    //TODO
 }

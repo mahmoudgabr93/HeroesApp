@@ -1,4 +1,8 @@
 package com.example.gabrm.retrofitjsonexample.viewmodel;
 
-public class BioFragmentViewModel {
+import android.arch.lifecycle.ViewModel;
+
+
+public class BioFragmentViewModel extends ViewModel {
+        //TODO
 }

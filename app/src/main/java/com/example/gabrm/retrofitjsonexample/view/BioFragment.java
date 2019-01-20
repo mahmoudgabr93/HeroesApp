@@ -36,11 +36,11 @@ public class BioFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private HeroViewModel heroViewModel;
-    HeroModel heroModel;
+    private static final String BUNDLE_TAG = "hero";
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private HeroModel heroModel;
 
     private OnFragmentInteractionListener mListener;
 
@@ -57,11 +57,12 @@ public class BioFragment extends Fragment {
      * @return A new instance of fragment BioFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static BioFragment newInstance(String param1, String param2) {
+
+
+    public static BioFragment newInstance(HeroModel heroModel) {
         BioFragment fragment = new BioFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putSerializable(BUNDLE_TAG,heroModel);
         fragment.setArguments(args);
         return fragment;
     }
@@ -70,8 +71,7 @@ public class BioFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            heroModel= (HeroModel) getArguments().getSerializable(BUNDLE_TAG);
         }
     }
 
@@ -115,6 +115,8 @@ public class BioFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
+
 
     /**
      * This interface must be implemented by activities that contain this
