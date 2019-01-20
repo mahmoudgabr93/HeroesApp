@@ -46,8 +46,6 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         HeroModel heroModel =  heroModelList.get(i);
         viewHolder.binding.setHeroModel(heroModel);
-        Bundle bundle=new Bundle();
-        bundle.putInt("i",i);
         Picasso.get().load(heroModel.getImageurl()).into(viewHolder.imageView);
     }
 
