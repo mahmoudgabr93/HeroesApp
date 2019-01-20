@@ -4,7 +4,9 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.net.Uri;
+import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,15 +24,21 @@ import java.util.List;
 
 public class HeroActivity extends AppCompatActivity implements recyclerFragment.OnFragmentInteractionListener,BioFragment.OnFragmentInteractionListener {
 
+    private final String RECYCLER_FRAGMENT_TAG="REC_FRAGMENT";
+    private final String TAG = getClass().getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerFragment recyclerFragment=new recyclerFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.frameLayout,recyclerFragment).commit();
+        Fragment fragment=getSupportFragmentManager().findFragmentByTag(TAG);
+        if(fragment ==null) {
+            getSupportFragmentManager().beginTransaction().
+                    add(R.id.frameLayout, recyclerFragment,TAG).
+                    addToBackStack(RECYCLER_FRAGMENT_TAG).commit();
+        }
     }
-
 
 
     @Override
