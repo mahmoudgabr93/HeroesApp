@@ -71,7 +71,6 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.ViewHolder> {
     public  class ViewHolder extends RecyclerView.ViewHolder
     {
         private ItemHeroCardBinding binding;
-        private ImageView imageView;
         private int position;
         private Context context;
         public ViewHolder(final ItemHeroCardBinding binding, final OnItemClickListener listener, final Context context1) {
@@ -94,7 +93,6 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.ViewHolder> {
                     }
                 }
             });
-            imageView = itemView.findViewById(R.id.imageView);
         }
     }
 }

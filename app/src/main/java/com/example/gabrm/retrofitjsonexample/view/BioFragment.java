@@ -75,6 +75,7 @@ public class BioFragment extends Fragment {
                 inflater, R.layout.fragment_bio, container, false);
         View view = bioBinding.getRoot();
         bioBinding.setHeroModel(getHeroObject());
+        setRetainInstance(true);
         return view;
     }
 

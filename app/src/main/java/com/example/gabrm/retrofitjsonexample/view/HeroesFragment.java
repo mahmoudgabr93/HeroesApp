@@ -6,10 +6,12 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +42,7 @@ public class HeroesFragment extends Fragment {
 
 
     private OnFragmentInteractionListener mListener;
+    private int lastFirstVisiblePosition;
 
     public HeroesFragment() {
         // Required empty private constructor
@@ -58,6 +61,20 @@ public class HeroesFragment extends Fragment {
         return fragment;
     }
 
+    /**
+     * This is a method for Fragment.
+     * You can do the same in onCreate or onRestoreInstanceState
+     */
+
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        lastFirstVisiblePosition = ((LinearLayoutManager)recyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
+        outState.putInt("position",lastFirstVisiblePosition);
+
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,10 +85,15 @@ public class HeroesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
             View view = inflater.inflate(R.layout.fragment_recycler, container, false);
-            initRecyclerView(view);
+            if(savedInstanceState!=null)
+                lastFirstVisiblePosition = savedInstanceState.getInt("position");
+
+        initRecyclerView(view);
             subscribeLiveData();
-            return view;
+            setRetainInstance(true);
+        return view;
     }
+
 
     private void initRecyclerView(View view) {
         recyclerView = view.findViewById(R.id.recyclerview);
@@ -92,11 +114,16 @@ public class HeroesFragment extends Fragment {
                     public void onItemClicked(HeroModel heroModel) {
                         BioFragment bioFragment=BioFragment.newInstance(heroModel);
                         getActivity().getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.frameLayout,bioFragment).addToBackStack(null).commit();
+                                .add(R.id.frameLayout,bioFragment).addToBackStack("BioTag").commit();
                     }
                 });
+                if(lastFirstVisiblePosition!=0)
+                {
+                    recyclerView.getLayoutManager().scrollToPosition(lastFirstVisiblePosition);
+                }
             }
         });
+
         heroModelList.clear();
     }
 
