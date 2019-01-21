@@ -2,6 +2,7 @@ package com.example.gabrm.retrofitjsonexample.adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -46,7 +47,11 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         HeroModel heroModel =  heroModelList.get(i);
         viewHolder.binding.setHeroModel(heroModel);
-        Picasso.get().load(heroModel.getImageurl()).into(viewHolder.imageView);
+    }
+
+    @BindingAdapter("app:loadItemImage")
+    public static void loadItemImage(ImageView imageView, String url) {
+        Picasso.get().load(url).into(imageView);
     }
 
     @Override

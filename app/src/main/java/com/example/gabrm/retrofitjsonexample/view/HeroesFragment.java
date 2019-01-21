@@ -38,12 +38,10 @@ public class HeroesFragment extends Fragment {
     private List<HeroModel> heroModelList = new ArrayList<>();
     // TODO: Rename and change types of parameters
 
-    private static HeroesFragment fragment =null;
 
     private OnFragmentInteractionListener mListener;
 
-    @SuppressLint("ValidFragment")
-    private HeroesFragment() {
+    public HeroesFragment() {
         // Required empty private constructor
     }
 
@@ -56,11 +54,7 @@ public class HeroesFragment extends Fragment {
     // TODO: Rename and change types and number of parameters
 
     public static HeroesFragment newInstance() {
-        if(fragment==null) {
-            fragment = new HeroesFragment();
-        }
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
+        HeroesFragment fragment = new HeroesFragment();
         return fragment;
     }
 

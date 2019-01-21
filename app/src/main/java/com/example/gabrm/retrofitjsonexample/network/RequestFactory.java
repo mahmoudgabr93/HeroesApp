@@ -2,12 +2,16 @@ package com.example.gabrm.retrofitjsonexample.network;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.example.gabrm.retrofitjsonexample.model.HeroModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -18,7 +22,10 @@ public class RequestFactory {
 
     private static Retrofit getRetrofitInstance()
     {
-        return new Retrofit.Builder().baseUrl(EndPoint.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client=new OkHttpClient.Builder().addInterceptor(interceptor).build();
+        return new Retrofit.Builder().baseUrl(EndPoint.BASE_URL).client(client).addConverterFactory(GsonConverterFactory.create()).build();
     }
 
     public static EndPoint getApi()
@@ -26,29 +33,7 @@ public class RequestFactory {
         return getRetrofitInstance().create(EndPoint.class);
     }
 
-    /**
-     * deprecated
-     * @return
-     */
-    public List<HeroModel> getHeroes()
-    {
-        final List<HeroModel> heroModels = new ArrayList<>();
-        EndPoint endPoint = RequestFactory.getApi();
-        Call<List<HeroModel>> call= endPoint.getHeroes();
-        call.enqueue(new Callback<List<HeroModel>>() {
-            @Override
-            public void onResponse(Call<List<HeroModel>> call, Response<List<HeroModel>> response) {
-                heroModels.addAll(response.body());
-            }
-
-            @Override
-            public void onFailure(Call<List<HeroModel>> call, Throwable t) {
-
-            }
-        });
-            return heroModels;
-    }
-    public LiveData<List<HeroModel>> getHeroesLiveData()
+     public LiveData<List<HeroModel>> getHeroesLiveData()
     {
         final MutableLiveData<List<HeroModel>> listMutableLiveData = new MutableLiveData<>();
         EndPoint endPoint = RequestFactory.getApi();
@@ -61,7 +46,6 @@ public class RequestFactory {
 
             @Override
             public void onFailure(Call<List<HeroModel>> call, Throwable t) {
-
             }
         });
         return listMutableLiveData;
