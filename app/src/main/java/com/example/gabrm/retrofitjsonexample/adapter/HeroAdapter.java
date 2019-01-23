@@ -84,10 +84,6 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.ViewHolder> {
                     {
                         position=getAdapterPosition();
                         if(position!=RecyclerView.NO_POSITION) {
-                            SharedPreferences sharedPreferences= PreferenceManager.getDefaultSharedPreferences(context);
-                            SharedPreferences.Editor editor=sharedPreferences.edit();
-                            editor.putInt("position",position);
-                            editor.commit();
                             listener.onItemClicked(heroModelList.get(position));
                         }
                     }

@@ -8,7 +8,7 @@ import android.os.Bundle;
 
 import com.example.gabrm.retrofitjsonexample.R;
 
-public class HeroActivity extends AppCompatActivity implements HeroesFragment.OnFragmentInteractionListener,BioFragment.OnFragmentInteractionListener {
+public class HeroActivity extends AppCompatActivity {
 
     private final String TAG = getClass().getSimpleName();
     Fragment fragment;
@@ -36,8 +36,4 @@ public class HeroActivity extends AppCompatActivity implements HeroesFragment.On
     }
 
     */
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
 }
